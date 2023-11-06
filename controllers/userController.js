@@ -8,10 +8,10 @@ module.exports = {
         .populate({ path: 'thoughts', select: '-__v' })
         .populate({ path: 'friends', select: '-__v' });
 
-      return res.status(200).json(userData);
+      res.status(200).json(userData);
     } catch (error) {
       console.log(error);
-      return res.status(500).json(error);
+      res.status(500).json(error);
     }
   },
 
@@ -23,13 +23,13 @@ module.exports = {
         .populate({ path: 'friends', select: '-__v' });
 
       if (!userData) {
-        return res.status(404).json({ message: 'No user with that ID' });
+        res.status(404).json({ message: 'No user with that ID' });
       }
 
-      return res.status(200).json(userData);
+      res.status(200).json(userData);
     } catch (error) {
       console.log(error);
-      return res.status(500).json(error);
+      res.status(500).json(error);
     }
   },
 
@@ -37,10 +37,10 @@ module.exports = {
   async createUser(req, res) {
     try {
       const userData = await User.create(req.body);
-      return res.status(200).json(userData);
+      res.status(200).json(userData);
     } catch (error) {
       console.log(error);
-      return res.status(500).json(error);
+      res.status(500).json(error);
     }
   },
 
@@ -54,13 +54,13 @@ module.exports = {
       );
 
       if (!userData) {
-        return res.status(404).json({ message: 'No user with this id!' });
+        res.status(404).json({ message: 'No user with this id!' });
       }
 
-      return res.status(200).json(userData);
+      res.status(200).json(userData);
     } catch (error) {
       console.log(error);
-      return res.status(500).json(error);
+      res.status(500).json(error);
     }
   },
 
@@ -69,15 +69,15 @@ module.exports = {
     try {
       const userData = await User.findOneAndDelete({ _id: req.params.userId });
       if (!userData) {
-        return res.status(404).json({ message: 'No user with that ID' });
+        res.status(404).json({ message: 'No user with that ID' });
       }
       await Thought.deleteMany({ _id: { $in: userData.thoughts } });
-      return res.status(200).json({
+      res.status(200).json({
         message: 'User and associated thoughts and reactions deleted!',
       });
     } catch (error) {
       console.log(error);
-      return res.status(500).json(error);
+      res.status(500).json(error);
     }
   },
 
@@ -91,13 +91,13 @@ module.exports = {
       );
 
       if (!userData) {
-        return res.status(404).json({ message: 'No user with that ID' });
+        res.status(404).json({ message: 'No user with that ID' });
       }
 
-      return res.status(200).json(userData);
+      res.status(200).json(userData);
     } catch (error) {
       console.log(error);
-      return res.status(500).json(error);
+      res.status(500).json(error);
     }
   },
 
@@ -111,13 +111,13 @@ module.exports = {
       );
 
       if (!userData) {
-        return res.status(404).json({ message: 'Check user and friend ID' });
+        res.status(404).json({ message: 'Check user and friend ID' });
       }
 
-      return res.status(200).json(userData);
+      res.status(200).json(userData);
     } catch (error) {
       console.log(error);
-      return res.status(500).json(error);
+      res.status(500).json(error);
     }
   },
 };
