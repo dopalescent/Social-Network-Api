@@ -16,7 +16,7 @@ module.exports = {
   },
 
   // Get one user
-  async getUser(req, res) {
+  async getSingleUser(req, res) {
     try {
       const userData = await User.findOne({ _id: req.params.userId })
         .populate({ path: 'thoughts', select: '-__v' })
